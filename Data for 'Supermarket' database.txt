@@ -1,0 +1,43 @@
+create table Bonus_card(
+	card_id decimal(12) not NULL,
+	primary key (card_id),
+	user_name varchar(12) not NULL,
+	user_surname varchar(12) not NULL,
+	number_of_orders int,
+	whole_total_cash int,
+	registry_date date not NULL
+);
+create table Orders (
+	order_id int not NULL,
+	primary key (order_id),
+	card_id decimal (12),
+	foreign key (card_id) references Bonus_card (card_id),
+	total_cash int,
+	order_date date
+);
+create table Products (
+	product_id decimal(8) not NULL,
+	primary key (product_id),
+	product_name varchar(20) not NULL,
+	product_price int not NULL
+);
+create table Receipt(
+	order_id int not NULL,
+	foreign key (order_id) references Orders (order_id),
+	product_id int not NULL,
+	foreign key (product_id) references Products (product_id)
+);
+
+insert into Bonus_card values 
+(1, 'Eldar', 'Makhmutov', 1, 100, '23-12-2019');
+insert into Orders values 
+(1, 1, 100, '24-12-2019');
+insert into Products values 
+(1, 'Milk', 100),
+(2, 'Bread', 65),
+(3, 'Eggs', 189),
+(4, 'Banana', 89),
+(5, 'Apple', 69),
+(6, 'Cookie', 77);
+insert into Receipt values 
+(1, 1);
